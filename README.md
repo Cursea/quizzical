@@ -8,3 +8,5 @@ Requirements:
 2. Pull 5 questions from the OTDB API https://opentdb.com/api_config.php
 3. Tally correctly answered questions after 'Check answers' is ticket
 4. Style & polish
+
+Setup created following gist: https://gist.github.com/Cursea/d14bab61eb25740f0e9eb02aecf62f4c
