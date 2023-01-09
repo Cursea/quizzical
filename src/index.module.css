@@ -1,5 +1,7 @@
 :root {
-    background-color: #242424;
+    display: flex;
+    justify-content: center;
+    background-color: #851111;
     color: rgba(255, 255, 255, 87%);
     font-weight: 400;
     font-size: 16px;
