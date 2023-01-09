@@ -1,0 +1,5 @@
+README.md
+*.scss
+node_modules/
+dist/
+.prettierrc.js

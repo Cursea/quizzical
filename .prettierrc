@@ -1,0 +1,18 @@
+{
+    "trailingComma": "all",
+    "printWidth": 120,
+    "bracketSpacing": true,
+    "semi": false,
+    "singleQuote": true,
+    "useTabs": false,
+    "tabWidth": 4,
+    "endOfLine": "auto",
+    "overrides": [
+        {
+            "files": "*.types.ts",
+            "options": {
+                "semi": true
+            }
+        }
+    ]
+}
