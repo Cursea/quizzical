@@ -10,3 +10,5 @@ Requirements:
 4. Style & polish
 
 Setup created following gist: https://gist.github.com/Cursea/d14bab61eb25740f0e9eb02aecf62f4c
+
+Create new component with command `npx generate-react-cli component (ComponentName)`
