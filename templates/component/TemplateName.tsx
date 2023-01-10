@@ -3,13 +3,13 @@ import styles from './TemplateName.module.css'
 
 // to generate, run: npx generate-react-cli component Test
 
-interface TemplateName {
+interface TemplateNameProps {
     props: any
 }
 
-const TemplateName: React.FC<TemplateName> = ({ props }) => (
+const TemplateName: React.FC<TemplateNameProps> = ({ props }) => (
     <div className={styles.templateName} data-testid="TemplateName">
-        <h1>TemplateName component</h1>
+        <div>TemplateName component</div>
     </div>
 )
 
