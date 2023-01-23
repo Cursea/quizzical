@@ -1,8 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './App.module.css'
 
 function App() {
     const [quizStarted, setQuizStarted] = useState(false)
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        fetch('https://opentdb.com/api.php?amount=5&type=multiple')
+            .then((res) => res.json())
+            .then((data) => setData(data.results))
+    }, [])
 
     const startScreen = () => (
         <div className={styles.startScreen}>
@@ -14,10 +21,19 @@ function App() {
         </div>
     )
 
+    // console.log('data', data)
+
     return (
         <div className={styles.app}>
             {!quizStarted && startScreen()}
-            {quizStarted && <button>Check answers</button>}
+            {quizStarted && (
+                <>
+                    {data.map((q, id) => (
+                        <p key={id}>{`${q.category} | ${q.question}`}</p>
+                    ))}
+                    <button>Check answers</button> <button onClick={() => setQuizStarted(false)}>Start again</button>
+                </>
+            )}
         </div>
     )
 }
