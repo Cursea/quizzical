@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import styles from './App.module.css'
+import Quiz from './components/Quiz/Quiz'
 
 function App() {
     const [quizStarted, setQuizStarted] = useState(false)
@@ -26,9 +27,7 @@ function App() {
             {!quizStarted && startScreen()}
             {quizStarted && (
                 <>
-                    {data.map((q, id) => (
-                        <p key={id}>{`${q.category} | ${q.question}`}</p>
-                    ))}
+                    <Quiz questions={data} />
                     <button>Check answers</button> <button onClick={() => setQuizStarted(false)}>Start again</button>
                 </>
             )}

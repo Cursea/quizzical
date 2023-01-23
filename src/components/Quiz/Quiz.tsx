@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Quiz.module.css'
 
 interface QuizProps {
-    props: any
+    questions: []
 }
 
-const Quiz: React.FC<QuizProps> = ({ props }) => {
+const Quiz: React.FC<QuizProps> = ({ questions }) => {
     return (
         <div className={styles.quiz} data-testid="Quiz">
-            <div>Quiz component</div>
+            <div>
+                {' '}
+                {questions.map((q, id) => (
+                    <p key={id}>{`${q.category} | ${q.question}`}</p>
+                ))}
+            </div>
         </div>
     )
 }
