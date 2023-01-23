@@ -27,10 +27,11 @@ a:hover {
 
 body {
     display: flex;
+    align-items: center;
+    justify-content: center;
     min-width: 550px;
     min-height: 100vh;
     margin: 0;
-    place-items: center;
 }
 
 h1 {

@@ -17,6 +17,7 @@
 }
 
 .startButton {
+    min-width: 200px;
     margin-top: 1rem;
     padding: 15px 30px;
     color: #fafbd0;
