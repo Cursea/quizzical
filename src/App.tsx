@@ -21,8 +21,6 @@ function App() {
         </div>
     )
 
-    // console.log('data', data)
-
     return (
         <div className={styles.app}>
             {!quizStarted && startScreen()}
