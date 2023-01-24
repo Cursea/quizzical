@@ -1,3 +1,16 @@
 .button {
     color: #fafbd0;
 }
+
+.correct {
+    background: #074f16;
+}
+
+.incorrect {
+    background: #e90202;
+    opacity: 0.6;
+}
+
+.revealed {
+    color: #fafbd0;
+}

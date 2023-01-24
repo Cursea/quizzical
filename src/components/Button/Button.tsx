@@ -3,11 +3,12 @@ import styles from './Button.module.css'
 
 interface ButtonProps {
     text: string
-    onClick: () => void
+    type?: boolean
+    onClick?: () => void
 }
 
-const Button: React.FC<ButtonProps> = ({ text, onClick }) => (
-    <button className={styles.button} data-testid="Button">
+const Button: React.FC<ButtonProps> = ({ text, onClick, type }) => (
+    <button className={`${styles.button} ${type ? styles.correct : styles.incorrect}`} data-testid="Button">
         {text}
     </button>
 )
