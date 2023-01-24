@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import he from 'he'
 import styles from './App.module.css'
 import Quiz from './components/Quiz/Quiz'
+import { QuestionType } from './types/appTypes'
 
 function App() {
     const [quizStarted, setQuizStarted] = useState(false)
@@ -9,7 +11,19 @@ function App() {
     useEffect(() => {
         fetch('https://opentdb.com/api.php?amount=5&type=multiple')
             .then((res) => res.json())
-            .then((data) => setData(data.results))
+            .then((data) => {
+                const decodedData = data.results.map((item: QuestionType) => {
+                    return {
+                        category: item.category,
+                        type: item.type,
+                        difficulty: item.difficulty,
+                        question: he.decode(item.question),
+                        correct_answer: he.decode(item.correct_answer),
+                        incorrect_answers: item.incorrect_answers.map((ans) => he.decode(ans)),
+                    }
+                })
+                setData(decodedData)
+            })
     }, [])
 
     const startScreen = () => (
@@ -28,7 +42,11 @@ function App() {
             {quizStarted && (
                 <>
                     <Quiz questions={data} />
-                    <button>Check answers</button> <button onClick={() => setQuizStarted(false)}>Start again</button>
+                    <span className={styles.resultsContainer}>
+                        <h5 className={styles.results}>You scored x/5 correct answers</h5>
+                        <button>Check answers</button>{' '}
+                        <button onClick={() => setQuizStarted(false)}>Start again</button>
+                    </span>
                 </>
             )}
         </div>
