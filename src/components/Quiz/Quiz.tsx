@@ -1,23 +1,11 @@
 import React, { ReactNode, useState } from 'react'
 import Button from '../Button/Button'
 import { shuffleArray } from '../../utils/shuffleArray'
+import { AnswerType, QuestionType } from '../../types/appTypes'
 import styles from './Quiz.module.css'
 
-interface QuestionType {
-    category: string
-    difficulty: string
-    type: 'multiple' | 'boolean'
-    question: string
-    correct_answer: string
-    incorrect_answers: []
-}
 interface QuizProps {
     questions: QuestionType[]
-}
-
-export interface AnswerType {
-    answer: string
-    correct: boolean
 }
 
 const question = (question: QuestionType): ReactNode => {

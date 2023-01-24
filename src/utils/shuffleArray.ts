@@ -1,4 +1,4 @@
-import { AnswerType } from '../components/Quiz/Quiz'
+import { AnswerType } from '../types/appTypes'
 
 export const shuffleArray = (array: AnswerType[]): AnswerType[] => {
     for (let i = array.length - 1; i > 0; i--) {
