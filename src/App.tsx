@@ -7,6 +7,7 @@ import { QuestionType } from './types/appTypes'
 function App() {
     const [quizStarted, setQuizStarted] = useState(false)
     const [data, setData] = useState([])
+    const [showAnswers, setShowAnswers] = useState(false)
 
     useEffect(() => {
         fetch('https://opentdb.com/api.php?amount=5&type=multiple')
@@ -41,10 +42,10 @@ function App() {
             {!quizStarted && startScreen()}
             {quizStarted && (
                 <>
-                    <Quiz questions={data} />
+                    <Quiz questions={data} showAnswers={showAnswers} />
                     <span className={styles.resultsContainer}>
                         <h5 className={styles.results}>You scored x/5 correct answers</h5>
-                        <button>Check answers</button>{' '}
+                        <button onClick={() => setShowAnswers(!showAnswers)}>Check answers</button>
                         <button onClick={() => setQuizStarted(false)}>Start again</button>
                     </span>
                 </>

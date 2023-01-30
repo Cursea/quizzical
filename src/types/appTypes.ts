@@ -11,3 +11,5 @@ export interface AnswerType {
     answer: string
     correct: boolean
 }
+
+export type AnswersType = AnswerType[]

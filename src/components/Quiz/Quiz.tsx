@@ -5,13 +5,14 @@ import styles from './Quiz.module.css'
 
 interface QuizProps {
     questions: QuestionType[]
+    showAnswers: boolean
 }
 
-const Quiz: React.FC<QuizProps> = ({ questions }) => {
+const Quiz: React.FC<QuizProps> = ({ questions, showAnswers }) => {
     return (
         <div className={styles.quiz} data-testid="Quiz">
             {questions.map((question) => (
-                <Question key={question.question} question={question} />
+                <Question key={question.question} question={question} showAnswers={showAnswers} />
             ))}
         </div>
     )
