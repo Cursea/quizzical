@@ -46,7 +46,14 @@ function App() {
                     <span className={styles.resultsContainer}>
                         <h5 className={styles.results}>You scored x/5 correct answers</h5>
                         <button onClick={() => setShowAnswers(!showAnswers)}>Check answers</button>
-                        <button onClick={() => setQuizStarted(false)}>Start again</button>
+                        <button
+                            onClick={() => {
+                                setQuizStarted(false)
+                                setShowAnswers(false)
+                            }}
+                        >
+                            Start again
+                        </button>
                     </span>
                 </>
             )}
