@@ -17,7 +17,7 @@ const Quiz: React.FC<QuizProps> = ({ showAnswers }) => {
 
         const fetchData = async () => {
             console.log('fetching data...')
-            fetch('https://opentdb.com/api.php?amount=5&type=multiple')
+            await fetch('https://opentdb.com/api.php?amount=5&type=multiple')
                 .then((res) => res.json())
                 .then((data) => {
                     const decodedData = data.results.map((item: QuestionType) => {
