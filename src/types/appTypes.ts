@@ -5,6 +5,7 @@ export interface QuestionType {
     question: string
     correct_answer: string
     incorrect_answers: []
+    answers?: AnswerType[]
 }
 
 export interface AnswerType {

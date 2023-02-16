@@ -3,6 +3,7 @@ import he from 'he'
 import styles from './App.module.css'
 import Quiz from './components/Quiz/Quiz'
 import { QuestionType } from './types/appTypes'
+import { shuffleArray } from './utils/shuffleArray'
 
 function App() {
     const [quizStarted, setQuizStarted] = useState(false)
@@ -10,6 +11,7 @@ function App() {
     const [showAnswers, setShowAnswers] = useState(false)
 
     useEffect(() => {
+        console.log('fetching data...')
         fetch('https://opentdb.com/api.php?amount=5&type=multiple')
             .then((res) => res.json())
             .then((data) => {
@@ -21,11 +23,15 @@ function App() {
                         question: he.decode(item.question),
                         correct_answer: he.decode(item.correct_answer),
                         incorrect_answers: item.incorrect_answers.map((ans) => he.decode(ans)),
+                        answers: shuffleArray([
+                            { answer: he.decode(item.correct_answer), correct: true },
+                            ...item.incorrect_answers.map((ans) => ({ answer: he.decode(ans), correct: false })),
+                        ]),
                     }
                 })
                 setData(decodedData)
             })
-    }, [])
+    }, [quizStarted])
 
     const startScreen = () => (
         <div className={styles.startScreen}>
@@ -36,6 +42,8 @@ function App() {
             </button>
         </div>
     )
+
+    console.log('data:', data)
 
     return (
         <div className={styles.app}>
