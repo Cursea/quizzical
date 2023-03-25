@@ -5,6 +5,7 @@ import Quiz from './components/Quiz/Quiz'
 function App() {
     const [quizStarted, setQuizStarted] = useState(false)
     const [showAnswers, setShowAnswers] = useState(false)
+    const [score, setScore] = useState(0)
 
     const startScreen = () => (
         <div className={styles.startScreen}>
@@ -16,23 +17,28 @@ function App() {
         </div>
     )
 
+    const resetQuiz = () => {
+        setQuizStarted(false)
+        setShowAnswers(false)
+        setScore(0)
+    }
+
+    const handleAnswer = (isCorrect: boolean) => {
+        if (isCorrect) {
+            setScore((score) => score + 1)
+        }
+    }
+
     return (
         <div className={styles.app}>
             {!quizStarted && startScreen()}
             {quizStarted && (
                 <>
-                    <Quiz showAnswers={showAnswers} />
+                    <Quiz showAnswers={showAnswers} handleAnswer={handleAnswer} />
                     <span className={styles.resultsContainer}>
-                        <h5 className={styles.results}>You scored x/5 correct answers</h5>
+                        {showAnswers && <h5 className={styles.results}>You scored {score}/5 correct answers</h5>}
                         <button onClick={() => setShowAnswers(!showAnswers)}>Check answers</button>
-                        <button
-                            onClick={() => {
-                                setQuizStarted(false)
-                                setShowAnswers(false)
-                            }}
-                        >
-                            Start again
-                        </button>
+                        <button onClick={resetQuiz}>Start again</button>
                     </span>
                 </>
             )}

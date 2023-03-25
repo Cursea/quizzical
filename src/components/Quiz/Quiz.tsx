@@ -6,11 +6,10 @@ import styles from './Quiz.module.css'
 
 interface QuizProps {
     showAnswers: boolean
-    score: number
-    setScore: React.Dispatch<React.SetStateAction<number>>
+    handleAnswer: (isCorrect: boolean) => void
 }
 
-const Quiz: React.FC<QuizProps> = ({ showAnswers, setScore }) => {
+const Quiz: React.FC<QuizProps> = ({ showAnswers, handleAnswer }) => {
     const [data, setData] = useState<QuestionType[]>([])
 
     useEffect(() => {
@@ -27,11 +26,6 @@ const Quiz: React.FC<QuizProps> = ({ showAnswers, setScore }) => {
         }
     }, [])
 
-    const handleAnswer = (isCorrect: boolean) => {
-        if (isCorrect) {
-            setScore((prevScore) => prevScore + 1)
-        }
-    }
     return (
         <div className={styles.quiz} data-testid="Quiz">
             {data.map((question) => (

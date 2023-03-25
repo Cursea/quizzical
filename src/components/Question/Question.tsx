@@ -6,12 +6,13 @@ import styles from './Question.module.css'
 interface QuestionProps {
     question: QuestionType
     showAnswers: boolean
+    handleAnswer: (isCorrect: boolean) => void
 }
 
-const Question: React.FC<QuestionProps> = ({ question, showAnswers }) => {
+const Question: React.FC<QuestionProps> = ({ question, showAnswers, handleAnswer }) => {
     const [selectedAnswer, setSelectedAnswer] = useState('')
-
     const { question: text, answers } = question
+
     return (
         <div className={styles.questionContainer} data-testid="Question">
             <h4 className={styles.questionHeader}>{text}</h4>
@@ -22,7 +23,10 @@ const Question: React.FC<QuestionProps> = ({ question, showAnswers }) => {
                         text={item.answer}
                         isCorrect={item.correct}
                         showAnswers={showAnswers}
-                        onClick={() => setSelectedAnswer(item.answer)}
+                        onClick={() => {
+                            setSelectedAnswer(item.answer)
+                            handleAnswer(item.correct)
+                        }}
                         isSelected={selectedAnswer === item.answer}
                     />
                 ))}
