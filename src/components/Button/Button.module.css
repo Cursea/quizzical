@@ -2,6 +2,10 @@
     color: #fafbd0;
 }
 
+.selected {
+    background-color: #646cff;
+}
+
 .correct {
     background: #074f16;
 }

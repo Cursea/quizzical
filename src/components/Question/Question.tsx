@@ -14,7 +14,7 @@ const Question: React.FC<QuestionProps> = ({ question, showAnswers }) => {
             <h4 className={styles.questionHeader}>{question.question}</h4>
             <ul className={styles.answers}>
                 {question.answers?.map((answer, i) => (
-                    <Button key={i} text={answer.answer} type={answer.correct} showAnswers={showAnswers} />
+                    <Button key={i} text={answer.answer} isCorrect={answer.correct} showAnswers={showAnswers} />
                 ))}
             </ul>
         </div>
