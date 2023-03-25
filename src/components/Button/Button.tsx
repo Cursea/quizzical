@@ -10,14 +10,18 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ text, isCorrect, showAnswers, isSelected, onClick }) => {
+    let buttonClasses = `${styles.button}`
+    if (isSelected) {
+        buttonClasses += ` ${styles.selected}`
+        if (showAnswers) {
+            buttonClasses += isCorrect ? ` ${styles.correct}` : ` ${styles.incorrect}`
+        }
+    } else if (showAnswers && isCorrect) {
+        buttonClasses += ` ${styles.correct}`
+    }
+
     return (
-        <button
-            className={`${styles.button} ${isSelected && styles.selected} ${
-                showAnswers ? (isCorrect ? styles.correct : styles.incorrect) : ''
-            }`}
-            data-testid="Button"
-            onClick={onClick}
-        >
+        <button className={buttonClasses} data-testid="Button" onClick={onClick}>
             {text}
         </button>
     )
