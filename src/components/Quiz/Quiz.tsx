@@ -1,43 +1,25 @@
-import he from 'he'
 import React, { useEffect, useState } from 'react'
 import { QuestionType } from '../../types/appTypes'
-import { shuffleArray } from '../../utils/shuffleArray'
 import Question from '../Question/Question'
+import { fetchQuizData } from '../../utils/fetchQuizData'
 import styles from './Quiz.module.css'
 
 interface QuizProps {
     showAnswers: boolean
+    score: number
+    setScore: React.Dispatch<React.SetStateAction<number>>
 }
 
-const Quiz: React.FC<QuizProps> = ({ showAnswers }) => {
+const Quiz: React.FC<QuizProps> = ({ showAnswers, setScore }) => {
     const [data, setData] = useState<QuestionType[]>([])
 
     useEffect(() => {
         let ignore = false
-
         const fetchData = async () => {
             console.log('fetching data...')
-            await fetch('https://opentdb.com/api.php?amount=5&type=multiple')
-                .then((res) => res.json())
-                .then((data) => {
-                    const decodedData = data.results.map((item: QuestionType) => {
-                        return {
-                            category: item.category,
-                            type: item.type,
-                            difficulty: item.difficulty,
-                            question: he.decode(item.question),
-                            correct_answer: he.decode(item.correct_answer),
-                            incorrect_answers: item.incorrect_answers.map((ans) => he.decode(ans)),
-                            answers: shuffleArray([
-                                { answer: he.decode(item.correct_answer), correct: true },
-                                ...item.incorrect_answers.map((ans) => ({ answer: he.decode(ans), correct: false })),
-                            ]),
-                        }
-                    })
-                    if (!ignore) setData(decodedData)
-                })
+            const quizData = await fetchQuizData(5)
+            if (!ignore) setData(quizData)
         }
-
         fetchData()
 
         return () => {
@@ -45,12 +27,20 @@ const Quiz: React.FC<QuizProps> = ({ showAnswers }) => {
         }
     }, [])
 
-    console.log('data:', data)
-
+    const handleAnswer = (isCorrect: boolean) => {
+        if (isCorrect) {
+            setScore((prevScore) => prevScore + 1)
+        }
+    }
     return (
         <div className={styles.quiz} data-testid="Quiz">
             {data.map((question) => (
-                <Question key={question.question} question={question} showAnswers={showAnswers} />
+                <Question
+                    key={question.question}
+                    question={question}
+                    showAnswers={showAnswers}
+                    handleAnswer={handleAnswer}
+                />
             ))}
         </div>
     )
