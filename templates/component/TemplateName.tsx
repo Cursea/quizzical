@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './TemplateName.module.css'
+import styles from './TemplateName.module.scss'
 
 // to generate, run: npx generate-react-cli component Test
 
